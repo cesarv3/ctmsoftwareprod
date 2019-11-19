@@ -88,7 +88,7 @@
             headers:{
               "Content-Type": "application/json",
               "Authorization": `Bearer ${token}`,
-              "Access-Control-Allow-Origin": "*"
+              "mode": 'no-cors'
             }
           })
           .then(response => {
