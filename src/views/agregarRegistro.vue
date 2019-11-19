@@ -41,6 +41,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+import Qs from 'qs'
 export default {
     name: "AgregarRegistro",
     props:{
@@ -73,29 +75,17 @@ export default {
             this.$emit("cancel")
         },
         crearRegistro () {
-            if(this.licencia === "elvilloida"){
-                fetch("https://ctmbackendprod.herokuapp.com/api/users", {
-                    method: "POST",
-                    body: JSON.stringify({
-                        "nombreUsuario": this.nombreUsuario,
-                        "password": this.password
-                    }),
-                    headers:{
-                        "Content-Type": "application/json"
-                    }
-                })
-                .then(response => {
-                    return response.json();
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-                alert("Registro creado con éxito");
+        if(this.licencia === "elvilloida"){
+            axios.post('https://ctmbackend.herokuapp.com/api/users', Qs.stringify({nombreUsuario: this.nombreUsuario, password: this.password}))
+            this.nombreUsuario='',
+            this.password='',
+            this.licencia='',
+            this.$emit("cancel")
         }else{
             alert("Licencia incorrecta")
         }
         }
     }
-};
+}
 </script>
 <style scoped></style

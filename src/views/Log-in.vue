@@ -15,7 +15,7 @@
             ></v-text-field>
             <v-text-field
               v-model="password"
-              ref="password"
+              ref="password" 
               label="Ingrese la contraseña"
               type="password"
               required
@@ -24,9 +24,9 @@
              <div class="my-2" align="center"> <v-btn text small color="#f90" @click="agregarUsuario()">Ingresar</v-btn></div>
             </div>
           </mdb-card-body>
-          <div class="footer" >
+          <mdb-modal-footer class="mx-5 pt-3 mb-1" align="rigth">
            <p class="littleFont">¿No está registrado? <div class="my-2"><v-btn text small @click="abrirRegistro()" color="#f90">Registrar empleado</v-btn></p></div>
-          </div>
+          </mdb-modal-footer>
         </mdb-card>
       </mdb-col>
     </mdb-row>
@@ -78,25 +78,29 @@
           this.token = res.data.token;
           console.log(res);
           this.id = res.data.user;
-          this.solicitarAcceso(this.token,this.id);
+          if(res.data.user == this.id)
+          {
+            this.principal();
+          }
+
+          //this.solicitarAcceso(this.token,this.id);
           }).catch((error) => {
           })
       },
-      solicitarAcceso(token,id){
+     /* solicitarAcceso(token,id){
             fetch(`https://ctmbackend.herokuapp.com/api/users/${id}`, {
             method: "GET",
             headers:{
               "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`,
+              "Authorization": `Bearer ${token}`
             }
           })
           .then(response => {
-            this.principal();
           })
           .catch(error => {
           	alert("El usuario o contraseña son incorrectas")
           });
-      }
+      }*/
     }
   }
 </script>
@@ -104,13 +108,13 @@
 <style>
   .myStyle {
   margin-top: 80px;
-  },
+  }
   .myCard {
     background: white;
-  },
+  }
   .title{
     color:black;
-  },
+  }
   .littleFont{
     color:#ff4b0d;
   }
