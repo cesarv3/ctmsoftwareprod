@@ -141,7 +141,8 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>    
+    <core-toolbar/>
     <core-drawer />
   </div>
 </template>
@@ -187,7 +188,7 @@ export default {
   },
   methods: {
     cargarObras () {
-      axios.get('https://ctmbackendprod.herokuapp.com/api/obras').then(result => {
+      axios.get('https://ctmbackend.herokuapp.com/api/obras').then(result => {
         this.items = result.data
       })
     },
@@ -198,13 +199,13 @@ export default {
       this.ubicacionObra = ''
     },
     crearObra () {
-      axios.post('https://ctmbackendprod.herokuapp.com/api/obras', Qs.stringify({nombre: this.nombreObra, descripcion: this.descripcionObra, ubicacion: this.ubicacionObra})).then((res) => {
+      axios.post('https://ctmbackend.herokuapp.com/api/obras', Qs.stringify({nombre: this.nombreObra, descripcion: this.descripcionObra, ubicacion: this.ubicacionObra})).then((res) => {
         this.limpiarVariables
-        this.cargarObras()
+        this.cargarObras() 
       })
     },
     eliminarObra (id) {
-      axios.delete(`https://ctmbackendprod.herokuapp.com/api/obras/${id}`).then ((res) =>{
+      axios.delete(`https://ctmbackend.herokuapp.com/api/obras/${id}`).then ((res) =>{
         if(res.data!='error')
           alert('Obra eliminada!')
         else
@@ -221,7 +222,7 @@ export default {
       this.ubicacionObra = ubicacion
     },
     modificarObra () {
-      axios.put(`https://ctmbackendprod.herokuapp.com/api/obras/${this.idObra}`,Qs.stringify({nombre: this.nombreObra, descripcion: this.descripcionObra, ubicacion: this.ubicacionObra})).then((res) => {
+      axios.put(`https://ctmbackend.herokuapp.com/api/obras/${this.idObra}`,Qs.stringify({nombre: this.nombreObra, descripcion: this.descripcionObra, ubicacion: this.ubicacionObra})).then((res) => {
         this.limpiarVariables()
         this.cargarObras()
       })

@@ -322,7 +322,7 @@
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             <button type="button" class="btn btn-primary" @click="asignarEmpleado()" data-dismiss="modal">Asignar empleado</button>
           </div>
-        </div>
+        </div>   
       </div>
     </div>
           <div class="modal fade" id="modalAsignarHerramienta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -363,7 +363,7 @@
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             <button type="button" class="btn btn-primary" @click="asignarHerramienta()" data-dismiss="modal">Asignar herramienta</button>
           </div>
-        </div>
+        </div>   
       </div>
     </div>
       <div class="modal fade" id="modalAsignarEquipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -402,7 +402,7 @@
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             <button type="button" class="btn btn-primary" @click="asignarEquipo()" data-dismiss="modal">Asignar equipo</button>
           </div>
-        </div>
+        </div>   
       </div>
     </div>
      <div class="modal fade" id="modalAsignarMaterial" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -443,9 +443,10 @@
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             <button type="button" class="btn btn-primary" @click="asignarMaterial()" data-dismiss="modal">Asignar material</button>
           </div>
-        </div>
+        </div>   
       </div>
     </div>
+    <core-toolbar/>
     <core-drawer />
   </div>
 </template>
@@ -579,72 +580,72 @@ export default {
   },
   methods: {
     cargarObras () {
-       axios.get('https://ctmbackendprod.herokuapp.com/api/obras').then(result => {
+       axios.get('https://ctmbackend.herokuapp.com/api/obras').then(result => {
         this.obras = result.data
       }).catch ((error) => {
         alert('No fue posible cargar las obras')
       })
     },
     cargarActividades (id) {
-      axios.get(`https://ctmbackendprod.herokuapp.com/api/actividades/${id}`).then(result => {
+      axios.get(`https://ctmbackend.herokuapp.com/api/actividades/${id}`).then(result => {
         this.actividades = result.data
       }).catch((error) => {
         alert('No fue posible cargar las actividades')
       })
     },
     cargarEmpleados () {
-      axios.get('https://ctmbackendprod.herokuapp.com/api/empleados').then(result => {
+      axios.get('https://ctmbackend.herokuapp.com/api/empleados').then(result => {
         this.empleados = result.data
       }).catch((error) => {
         alert('No fue posible cargar empleados')
       })
     },
     cargarHerramientas () {
-      axios.get('https://ctmbackendprod.herokuapp.com/api/herramientas').then(result => {
+      axios.get('https://ctmbackend.herokuapp.com/api/herramientas').then(result => {
         this.herramientas = result.data
       }).catch((error) => {
         alert('No fue posible cargar herramientas')
       })
     },
     cargarEquipos () {
-      axios.get('https://ctmbackendprod.herokuapp.com/api/equipos').then(result => {
+      axios.get('https://ctmbackend.herokuapp.com/api/equipos').then(result => {
         this.equipos = result.data
       }).catch((error) => {
         alert('No fue posible cargar equipos')
       })
     },
     cargarMateriales () {
-      axios.get('https://ctmbackendprod.herokuapp.com/api/materiales').then(result => {
+      axios.get('https://ctmbackend.herokuapp.com/api/materiales').then(result => {
         this.materiales = result.data
       }).catch((error) => {
         alert('No fue posible cargar materiales')
       })
     },
     cargarDatosAsignados (id) {
-      this.idActividad = id;
-      axios.get(`https://ctmbackendprod.herokuapp.com/api/actividad_empleados/${id}`).then(result => {
+      this.idActividad = id; 
+      axios.get(`https://ctmbackend.herokuapp.com/api/actividad_empleados/${id}`).then(result => {
         this.empleadosAsignados = result.data
       }).catch((error) => {
         console.error(error)
       })
-       axios.get(`https://ctmbackendprod.herokuapp.com/api/actividad_herramientas/${id}`).then(result => {
+       axios.get(`https://ctmbackend.herokuapp.com/api/actividad_herramientas/${id}`).then(result => {
         this.herramientasAsignadas = result.data
       }).catch((error) => {
         console.error(error)
       })
-      axios.get(`https://ctmbackendprod.herokuapp.com/api/actividad_equipos/${id}`).then(result => {
+      axios.get(`https://ctmbackend.herokuapp.com/api/actividad_equipos/${id}`).then(result => {
         this.equiposAsignados = result.data
       }).catch((error) => {
         console.error(error)
       })
-      axios.get(`https://ctmbackendprod.herokuapp.com/api/actividad_materiales/${id}`).then(result => {
+      axios.get(`https://ctmbackend.herokuapp.com/api/actividad_materiales/${id}`).then(result => {
         this.materialesAsignados = result.data
       }).catch((error) => {
         console.error(error)
       })
     },
     asignarEmpleado () {
-      axios.post(`https://ctmbackendprod.herokuapp.com/api/actividad_empleados/${this.idActividad}/${this.empleadoID}`).then((res) => {
+      axios.post(`https://ctmbackend.herokuapp.com/api/actividad_empleados/${this.idActividad}/${this.empleadoID}`).then((res) => {
         this.cargarDatosAsignados(`${this.idActividad}`)
         alert('Empleado asignado!')
       }).catch((error) => {
@@ -653,7 +654,7 @@ export default {
       })
     },
     asignarHerramienta () {
-      axios.post(`https://ctmbackendprod.herokuapp.com/api/actividad_herramientas/${this.idActividad}/${this.herramientaID}`, Qs.stringify({cantidad: this.cantidadHerramienta})).then((res) => {
+      axios.post(`https://ctmbackend.herokuapp.com/api/actividad_herramientas/${this.idActividad}/${this.herramientaID}`, Qs.stringify({cantidad: this.cantidadHerramienta})).then((res) => {
         this.cargarDatosAsignados(`${this.idActividad}`)
         alert('Herramienta asignada!')
       }).catch((error) => {
@@ -662,7 +663,7 @@ export default {
       })
     },
     asignarEquipo () {
-      axios.post(`https://ctmbackendprod.herokuapp.com/api/actividad_equipos/${this.idActividad}/${this.equipoID}`).then((res) => {
+      axios.post(`https://ctmbackend.herokuapp.com/api/actividad_equipos/${this.idActividad}/${this.equipoID}`).then((res) => {
         this.cargarDatosAsignados(`${this.idActividad}`)
         alert('Equipo asignado!')
       }).catch((error) => {
@@ -671,7 +672,7 @@ export default {
       })
     },
     asignarMaterial () {
-      axios.post(`https://ctmbackendprod.herokuapp.com/api/actividad_materiales/${this.idActividad}/${this.materialID}`, Qs.stringify({cantidad: this.cantidadMaterial})).then((res) => {
+      axios.post(`https://ctmbackend.herokuapp.com/api/actividad_materiales/${this.idActividad}/${this.materialID}`, Qs.stringify({cantidad: this.cantidadMaterial})).then((res) => {
         this.cargarDatosAsignados(`${this.idActividad}`)
         alert('Material asignado!')
       }).catch((error) => {
@@ -680,7 +681,7 @@ export default {
       })
     },
     desasignarEmpleado (idEmpleado) {
-      axios.delete(`https://ctmbackendprod.herokuapp.com/api/actividad_empleados/${this.idActividad}/${idEmpleado}`).then((res) => {
+      axios.delete(`https://ctmbackend.herokuapp.com/api/actividad_empleados/${this.idActividad}/${idEmpleado}`).then((res) => {
         this.cargarDatosAsignados(`${this.idActividad}`)
         alert('Empleado desasignado!')
       }).catch((error) => {
@@ -689,7 +690,7 @@ export default {
       })
     },
     desasignarHerramienta (idHerramienta) {
-      axios.delete(`https://ctmbackendprod.herokuapp.com/api/actividad_herramientas/${this.idActividad}/${idHerramienta}`).then((res) => {
+      axios.delete(`https://ctmbackend.herokuapp.com/api/actividad_herramientas/${this.idActividad}/${idHerramienta}`).then((res) => {
         this.cargarDatosAsignados(`${this.idActividad}`)
         alert('Herramienta desasignada!')
       }).catch((error) => {
@@ -698,7 +699,7 @@ export default {
       })
     },
     desasignarEquipo (idEquipo) {
-      axios.delete(`https://ctmbackendprod.herokuapp.com/api/actividad_equipos/${this.idActividad}/${idEquipo}`).then((res) => {
+      axios.delete(`https://ctmbackend.herokuapp.com/api/actividad_equipos/${this.idActividad}/${idEquipo}`).then((res) => {
         this.cargarDatosAsignados(`${this.idActividad}`)
         alert('Equipo desasignado!')
       }).catch((error) => {
@@ -707,7 +708,7 @@ export default {
       })
     },
     desasignarMaterial (idMaterial) {
-      axios.delete(`https://ctmbackendprod.herokuapp.com/api/actividad_materiales/${this.idActividad}/${idMaterial}`).then((res) => {
+      axios.delete(`https://ctmbackend.herokuapp.com/api/actividad_materiales/${this.idActividad}/${idMaterial}`).then((res) => {
         this.cargarDatosAsignados(`${this.idActividad}`)
         alert('Material desasignado!')
       }).catch((error) => {
@@ -730,3 +731,4 @@ export default {
   }
 }
 </script>
+

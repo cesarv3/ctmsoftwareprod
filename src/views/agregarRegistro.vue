@@ -8,7 +8,7 @@
             <v-container>
                     <v-text-field
                     v-model="nombreUsuario"
-                    ref="nombreUsuario"
+                    ref="nombreUsuario" 
                     label="Nombre de Usuario *"
                     hint="ejemplo: IngenieroVilla"
                     persistent-hint
@@ -16,14 +16,14 @@
                     ></v-text-field>
                     <v-text-field
                     v-model="password"
-                    ref="password"
+                    ref="password" 
                     type="password"
                     label="Contraseña*"
                     required
                     ></v-text-field>
                     <v-text-field
                     v-model="licencia"
-                    ref="licencia"
+                    ref="licencia" 
                     type="password"
                     label="Licencia*"
                     required

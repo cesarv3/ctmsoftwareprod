@@ -4,12 +4,12 @@
       fill-height
       fluid
       grid-list-xl
-    >
+    >  
       <v-layout
         justify-center
         wrap
       >
-        <v-flex
+        <v-flex 
           m12
         >
         <material-card
@@ -105,9 +105,9 @@
                 data-target="#crearActividad">
                 Nueva Actividad
               </v-btn>
-          </v-layout>
+          </v-layout>   
           </material-card>
-
+          
         </v-flex>
       </v-layout>
     </v-container>
@@ -163,6 +163,7 @@
         </div>
       </div>
     </div>
+    <core-toolbar/>
     <core-drawer />
   </div>
 </template>
@@ -200,14 +201,14 @@ export default {
   },
   methods: {
     mostrarObras () {
-      axios.get('https://ctmbackendprod.herokuapp.com/api/obras').then(result => {
+      axios.get('https://ctmbackend.herokuapp.com/api/obras').then(result => {
         this.obras = result.data
         console.log(this.obras)
       })
     },
     modificarProgreso(descripcion,id,progreso) {
       console.log('a')
-      axios.put(`https://ctmbackendprod.herokuapp.com/api/actividades/${id}}`, Qs.stringify({id: id,descripcion: descripcion, progreso:progreso}))
+      axios.put(`https://ctmbackend.herokuapp.com/api/actividades/${id}}`, Qs.stringify({id: id,descripcion: descripcion, progreso:progreso}))
       .then((res) => {
         console.log('Hecho')
       }).catch((error) => {
@@ -215,19 +216,19 @@ export default {
       })
     },
     cargarActividadModificar (descripcionActividad,progreso,id) {
-      this.idActividad = id
+      this.idActividad = id 
       this.descripcionActividad = descripcionActividad
-      this.progreso = progreso
+      this.progreso = progreso 
     },
     cargarActividades () {
-      axios.get(`https://ctmbackendprod.herokuapp.com/api/actividades/${this.obra}`).then(result => {
+      axios.get(`https://ctmbackend.herokuapp.com/api/actividades/${this.obra}`).then(result => {
         this.actividades = result.data
       }).catch((error) => {
         console.error(error)
       })
     },
     modificarActividad () {
-      axios.put(`https://ctmbackendprod.herokuapp.com/api/actividades/${this.idActividad}`, Qs.stringify({id: this.idActividad,descripcion: this.descripcionActividad, progreso: this.progreso}))
+      axios.put(`https://ctmbackend.herokuapp.com/api/actividades/${this.idActividad}`, Qs.stringify({id: this.idActividad,descripcion: this.descripcionActividad, progreso: this.progreso}))
       .then((res) => {
         this.descripcionActividad = ''
         this.progresoActividad = ''
@@ -239,16 +240,16 @@ export default {
 
     },
     crearActividad () {
-      axios.post('https://ctmbackendprod.herokuapp.com/api/actividades', Qs.stringify({idObra: this.obra, descripcion: this.descripcionActividad, progreso: this.progreso})).then((res) => {
+      axios.post('https://ctmbackend.herokuapp.com/api/actividades', Qs.stringify({idObra: this.obra, descripcion: this.descripcionActividad, progreso: this.progreso})).then((res) => {
         this.descripcionActividad = ''
         this.progreso = ''
-        this.cargarActividades()
+        this.cargarActividades() 
       }).catch((error) => {
           alert('Error: No fue posible crear la actividad')
       })
     },
     eliminarActividad (id) {
-      axios.delete(`https://ctmbackendprod.herokuapp.com/api/actividades/${id}`).then ((res) =>{
+      axios.delete(`https://ctmbackend.herokuapp.com/api/actividades/${id}`).then ((res) =>{
         this.cargarActividades()
       }).catch((error) => {
         alert('Error: No fue posible eliminar la actividad')

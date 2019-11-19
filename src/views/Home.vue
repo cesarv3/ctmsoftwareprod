@@ -14,6 +14,7 @@
         <h3>"Su sistema para la supervisión y control de obra"</h3>
       </v-flex>
     </v-layout>
+    <core-toolbar/>
     <core-drawer />
   </v-container>
 </template>

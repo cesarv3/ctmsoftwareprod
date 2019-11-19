@@ -9,7 +9,7 @@
             </div>
             <v-text-field
               v-model="username"
-              ref="username"
+              ref="username" 
               label="Ingrese el nombre de usuario"
               required
             ></v-text-field>
@@ -66,7 +66,7 @@
         id: ''
       }
     },
-    methods: {
+    methods: { 
       principal(){
         this.$router.push({name: "home"})
       },
@@ -74,18 +74,21 @@
         this.mostrarRegistro=true;
       },
       agregarUsuario(){
-          axios.post('https://ctmbackend.herokuapp.com/api/login', Qs.stringify({username: this.username,password: this.password})).then((res) => {
-          this.token = res.data.token;
-          console.log(res);
-          this.id = res.data.user;
-          if(res.data.user == this.id)
-          {
+                 
+         console.log(this.username);
+         axios.get(`https://ctmbackend.herokuapp.com/api/users/${this.username}`).then(result => {
+          console.log(result.data);
+          if(result.data[0].password != this.password && result.data[0].nombreUsuario != this.username){
+            alert("Nombre de usuario o usuario Incorrecto");
+          }
+          else{
             this.principal();
           }
-
-          //this.solicitarAcceso(this.token,this.id);
-          }).catch((error) => {
-          })
+            
+        }).catch((error) => {
+          console.error(error)
+          alert("Nombre de usuario o usuario incorrecto");
+        })
       },
      /* solicitarAcceso(token,id){
             fetch(`https://ctmbackend.herokuapp.com/api/users/${id}`, {
