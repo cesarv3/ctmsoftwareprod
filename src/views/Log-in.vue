@@ -5,7 +5,7 @@
         <mdb-card class="myCard">
           <mdb-card-body class="mx-4">
             <div class="text-center">
-              <h3 class="title">Iniciar sesión</h3>
+              <h3 class="titleLogin">Iniciar sesión</h3>
             </div>
             <v-text-field
               v-model="username"
@@ -115,14 +115,13 @@
   .myCard {
     background: white;
   }
-  .title{
+  .titleLogin{
     color:black;
   }
   .littleFont{
     color:#ff4b0d;
   }
   .footer{
-
     margin-right:-400px;
   }
 </style>
