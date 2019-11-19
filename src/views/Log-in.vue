@@ -74,7 +74,7 @@
         this.mostrarRegistro=true;
       },
       agregarUsuario(){
-          axios.post('https://ctmbackendprod.herokuapp.com/api/login', Qs.stringify({username: this.username,password: this.password})).then((res) => {
+          axios.post('https://ctmbackend.herokuapp.com/api/login', Qs.stringify({username: this.username,password: this.password})).then((res) => {
           this.token = res.data.token;
           console.log(res);
           this.id = res.data.user;
@@ -83,7 +83,7 @@
           })
       },
       solicitarAcceso(token,id){
-            fetch(`https://ctmbackendprod.herokuapp.com/api/users/${id}`, {
+            fetch(`https://ctmbackend.herokuapp.com/api/users/${id}`, {
             method: "GET",
             headers:{
               "Content-Type": "application/json",
